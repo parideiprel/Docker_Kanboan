@@ -1,0 +1,25 @@
+version: '3'
+services:
+  kanboard:
+    image: kanboard/kanboard:v1.2.15
+    ports:
+     - "81:80"
+    volumes:
+     - /Volumes/SSD32GB/data:/var/www/app/data
+     - /Volumes/SSD32GB/plugins:/var/www/app/plugins
+    environment:
+      DATABASE_URL: mysql://root:Vaccalafica78@db/kanboard
+  db:
+    image: mariadb:10.1.47
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+     - /Volumes/SSD32GB/mariadb:/var/lib/mysql
+     - /Volumes/SSD32GB/dbdump:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: Vaccalafica78
+      MYSQL_DATABASE: kanboard
+#      MYSQL_USER: root
+#      MYSQL_PASSWORD: Vaccalafica78
+# volumes:
+#  kanboard_data:
+#  kanboard_plugins:
